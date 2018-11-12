@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="layout/layout :: head"></head>
+<body>
+
+    
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container py-4">
+
+		<div class="card bg-light">
+			
+			<div class="card-body">
+
+				
+				<table class="table table-striped table-hover table-bordered my-3">
+					<thead class="thead-inverse">
+						<tr>
+							
+							<th th:text="#{text.pallet.nopallet}">No Pallet</th>
+							<th th:text="#{text.pallet.nopedido}">No Pedido</th>
+							<th th:text="#{text.pallet.noentrega}">No. Entrega</th>
+							<th th:text="#{text.pallet.cliente}">Cliente</th>
+							<th th:text="#{text.pallet.skus}">SKU's</th>
+							
+							<th th:text="#{text.pallet.imprimir}" sec:authorize="hasRole('ROLE_USER')">Imprimir Etiqueta</th>
+							
+						</tr>
+					</thead>
+					<tbody>
+						 <tr th:each="pallets: ${palletview}">
+						
+							
+							<td th:text="${pallets.nopallet}"></td>
+							<td th:text="${pallets.nopedido}"></td>
+							<td th:text="${pallets.noentrega}"></td>
+							<td th:text="${pallets.noclienteentrega}"></td>
+							<td th:text="${pallets.sku}"></td>
+							
+							
+							<td sec:authorize="hasRole('ROLE_USER')"><a class="btn btn-primary btn-xs"
+								th:href="@{'/descargarpdf/' + ${pallets.id}(format=pdf)}" th:text="#{text.pallet.imprimir}"></a></td>
+							
+						</tr>
+						
+					</tbody>
+
+				</table>
+				
+			</div>
+		</div>
+
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

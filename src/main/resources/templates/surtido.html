@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="layout/layout :: head"></head>
+<body>
+
+<header th:replace="layout/layout :: header"></header>
+
+	<div class="container py-4">
+	
+			<h4 class="card-title">
+					
+					<a class="btn btn-success btn-xs float-right" th:href="@{'/descargar/' + ${parametros.nopedido}(format=xlsx)}">Export XLS</a>
+				</h4>
+	
+		<form th:action="@{/ver}" class="form-inline" method="post" th:object="${parametros}">
+		
+  			<div class="form-group mx-sm-3 mb-2">
+    		
+    		<input type="text" class="form-control" id="surtidpoInput" th:field="*{nopedido}"  placeholder="Numero de pedido">
+    
+  			</div>
+  
+  			<button type="submit" class="btn btn-primary mb-2">Enter</button>
+		</form>
+		
+		
+	
+	<div class="card-body">
+	
+	<table 	class="table table-striped table-hover table-bordered my-3">
+					<thead>
+						<tr>
+							<th th:text="#{text.surtido.noentrega}">Pedido</th>
+							<th th:text="#{text.surtido.posicion}">Entrega</th>
+							<th th:text="#{text.surtido.lote}">Cliente</th>
+							<th th:text="#{text.surtido.sku}">Pallet</th>
+							<th th:text="#{text.surtido.nocaja}">Caja</th>
+							<th th:text="#{text.surtido.nocliente}">Posicion</th>
+							<!-- <th th:text="#{text.surtido.nopallet}">sku</th> -->
+							<th th:text="#{text.surtido.nopedido}">descripcion</th>
+							<th th:text="#{text.surtido.fechasalida}">peso neto</th>
+							<th th:text="#{text.surtido.pesoneto}">peso bruto</th>
+							<th th:text="#{text.surtido.umb}">cajas</th>
+							<!--  <th th:text="#{text.surtido.umb}">umb</th>
+							<th th:text="#{text.surtido.lote}">lote</th>
+							<th th:text="#{text.surtido.fechaproduccion}">fecha produccion</th>
+							<th th:text="#{text.surtido.fechacaducidad}">fecha caducidad</th>
+							<th th:text="#{text.surtido.fechasalida}">fecha salida</th>
+							-->
+						</tr>
+					</thead>
+					<tbody>
+						 <tr th:each="linea: ${tablasurtido}">
+							<td th:text="${linea.noentrega}"></td>
+							<td th:text="${linea.posicion}"></td>
+							<td th:text="${linea.lote}">Cliente</td>
+							<td th:text="${linea.sku}">Pallet</td>
+							<td th:text="${linea.hu}">Caja</td>
+							<td th:text="${linea.clientedestino}">Posicion</td>
+							<!-- <td th:text="${linea.nopallet}">sku</td> -->
+							<td th:text="${linea.foliosalida}">descripcion</td>
+							<td th:text="${linea.fecharegistro}">peso neto</td>
+							<td th:text="${linea.pesoneto}">peso bruto</td>
+							<td th:text="${linea.umb}">cajas</td>
+							<!-- <td th:text="${linea.umb}">umb</td>
+							<td th:text="${linea.lote}">lote</td>
+							<td th:text="${linea.fechaproduccion}">fecha produccion</td>
+							<td th:text="${linea.fechacaducidad}">fecha caducidad</td>
+							<td th:text="${linea.fecharegistro}">fecha salida</td>
+							-->
+						</tr> 
+					</tbody>
+
+				</table>
+	
+	</div>
+	
+</div>
+<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

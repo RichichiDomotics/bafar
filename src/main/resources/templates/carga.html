@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="layout/layout :: head"></head>
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container py-4">
+
+			<form th:action="@{/excelcarga}" method="post" enctype="multipart/form-data">
+  				<div class="form-group">
+    				<label for="excelCarnemart">Cargar Archivo</label>
+    				<input type="file" required class="form-control-file" accept="application/vnd.ms-excel" name="file" id="excelCarnemart">
+    				
+  				</div>
+  				<input class="btn btn-outline-success" th:type="submit" value="Cargar" />
+			</form>		
+			
+			<div class="table-wrapper-scroll-y">
+			
+			<table class="table table-striped table-hover table-bordered my-3" id="tab_properties"> 
+			 
+					<tr th:each="aplicacion : ${tablaexcel}">
+				
+						<td th:class="(${aplicacion.cb1} == '') ? 'invisible' : '' " th:text="${aplicacion.cb1}"></td>        				
+        				<td th:class="(${aplicacion.cb2} == '') ? 'invisible' : '' " th:text=" ${aplicacion.cb2}"></td>
+        				<td th:class="(${aplicacion.cb3} == '') ? 'invisible' : '' " th:text="${aplicacion.cb3}"></td>
+        				<td th:class="(${aplicacion.cb4} == '') ? 'invisible' : '' " th:text="${aplicacion.cb4}"></td>
+        				<td th:class="(${aplicacion.cb5} == '') ? 'invisible' : '' " th:text="${aplicacion.cb5}"></td>
+        				<td th:class="(${aplicacion.cb6} == '') ? 'invisible' : '' " th:text="${aplicacion.cb6}"></td>
+        				<td th:class="(${aplicacion.cb7} == '') ? 'invisible' : '' " th:text="${aplicacion.cb7}"></td>
+        				<td th:class="(${aplicacion.cb8} == '') ? 'invisible' : '' " th:text="${aplicacion.cb8}"></td>
+        				<td th:class="(${aplicacion.cb9} == '') ? 'invisible' : 'visible' " th:text="${aplicacion.cb9}"></td>
+        				<td th:class="(${aplicacion.cb10} == '') ? 'invisible' : 'visible' " th:text="${aplicacion.cb10}"></td>
+
+    				</tr>
+				</table>
+				</div>
+			</div>	
+
+
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>
